@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TSLibrary.Control.TSButton" Collapsed="true">
+    <Position X="2.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAAAAIgBIAAFAAAIAAACAAAiIMhQoaEACAAA=</HashCode>
+      <FileName>Control\TSButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSLibrary.Control.TSControl" Collapsed="true">
+    <Position X="3.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>CACAiAAIRIAgIEAgAABkAHAIxBBAAAIAIgEICCACAAI=</HashCode>
+      <FileName>Control\TSControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSLibrary.VisibleEntity.Control.TSControlManager" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAYAAAaBAAACAAAAAAAABAAgQAAABEAAAAEoAAAAAAI=</HashCode>
+      <FileName>Control\TSControlManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSLibrary.VisibleEntity.Control.TSMarginType" Collapsed="true">
+    <Position X="9.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Control\TSMarginType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSLibrary.Input.TSInputHandler" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAAQACAwAAAAAAAAABAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Input\TSInputHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSLibrary.Layout.TSLayout" Collapsed="true">
+    <Position X="5" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIBIIhAgBwBABAAEAAAADAAAAAIgAoDAACAAA=</HashCode>
+      <FileName>Layout\TSLayout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSLibrary.Screen.TSScreen" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgBAAAAAAAAAAAAAAAAAAAAoBAAAAAQ=</HashCode>
+      <FileName>Screen\TSScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSLibrary.TSGameEntity" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAYAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>TSGameEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSLibrary.TSInvisibleGameEntity" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TSInvisibleGameEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TSLibrary.TSVisibleGameEntity" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABACAAgAgAAAAAEAAAhABAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>TSVisibleGameEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

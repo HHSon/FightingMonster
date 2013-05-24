@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]D:\duLieu\hoctap\CNPM\4. Game\DoAn\FightingMonters\TSLibraryTest\TSLibraryTest.csproj</TopNode>
+  <SelectedNode>[0-1001]TSLibraryTest.TSControlManagerTest</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]D:\duLieu\hoctap\CNPM\4. Game\DoAn\FightingMonters\TSLibraryTest\TSLibraryTest.csproj" Expanded="true" />
+    <Node UniqueName="[0-1020]D:\duLieu\hoctap\CNPM\4. Game\DoAn\FightingMonters\TSLibraryTest\bin\Debug\TSLibraryTest.dll" Expanded="true" />
+    <Node UniqueName="[0-1021]TSLibraryTest" Expanded="true" />
+    <Node UniqueName="[0-1002]TSLibraryTest.TSControlTest" Expanded="true" />
+  </Nodes>
+</VisualState>

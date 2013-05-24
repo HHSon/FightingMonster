@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\duLieu\hoctap\CNPM\4. Game\DoAn\FightingMonters\TSLibraryTest\TSLibraryTest.csproj" total="17" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-05-01" time="23:16:48">
+  <environment nunit-version="2.6.2.12296" clr-version="2.0.50727.5466" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE" machine-name="HHS-PC" user="HHS" user-domain="HHS-PC" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Project" name="D:\duLieu\hoctap\CNPM\4. Game\DoAn\FightingMonters\TSLibraryTest\TSLibraryTest.csproj" executed="True" result="Success" success="True" time="0.468" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="D:\duLieu\hoctap\CNPM\4. Game\DoAn\FightingMonters\TSLibraryTest\bin\Debug\TSLibraryTest.dll" executed="True" result="Success" success="True" time="0.452" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="TSLibraryTest" executed="True" result="Success" success="True" time="0.452" asserts="0">
+            <results>
+              <test-suite type="TestFixture" name="TSControlManagerTest" executed="True" result="Inconclusive" success="False" time="0.016" asserts="0" />
+              <test-suite type="TestFixture" name="TSControlTest" executed="True" result="Success" success="True" time="0.421" asserts="0">
+                <results>
+                  <test-case name="TSLibraryTest.TSControlTest.TestControlPositionOnScreenWhenChangeLeftMargin" executed="True" result="Success" success="True" time="0.140" asserts="1" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestControlPositionOnScreenWhenChangeParentPosition" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestControlPositionOnScreenWhenChangePosition" executed="True" result="Success" success="True" time="0.016" asserts="2" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestControlPositionOnScreenWhenChangeTopMargin" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestInitPosition" executed="True" result="Success" success="True" time="0.016" asserts="8" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestIsMouseHover" executed="True" result="Success" success="True" time="0.000" asserts="9" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestPositionOnScreenWhenAddToLayout" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetBothLeftAndRightMargin" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetBothTopAndBottomMargin" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetBottomMargin" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetBottomMarginCenter" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetLeftMargin" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetLeftMarginCenter" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetRightMargin" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetRightMarginCenter" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetTopMargin" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                  <test-case name="TSLibraryTest.TSControlTest.TestSetTopMarginCenter" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
