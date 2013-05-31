@@ -5,9 +5,9 @@ using System.Linq;
 using NUnit.Framework;
 using TSLibrary;
 using Microsoft.Xna.Framework;
-using TSLibrary.Layout;
-using TSLibrary.Control;
-using TSLibrary.VisibleEntity.Control;
+using TSLibrary.ui.Control;
+using TSLibrary.ui.Control.Layout;
+using TSLibrary.ui.Control.MarginType;
 
 
 namespace TSLibraryTest

@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace TSLibrary
 {
+    /// <summary>
+    /// Đối tượng gốc mà mọi đối tượng được vẽ lên màn hình kế thừa
+    /// </summary>
     public abstract class TSVisibleGameEntity : TSGameEntity
     {
         protected bool _visibled;
@@ -18,12 +21,18 @@ namespace TSLibrary
 
         #region Property Region
 
+        /// <summary>
+        /// Cho phép đối tượng có được vẽ lên hay không
+        /// </summary>
         public virtual bool Visibled
         {
             get { return _visibled; }
             set { _visibled = value; }
         }
 
+        /// <summary>
+        /// Vị trí của đối tượng
+        /// </summary>
         public virtual Vector2 Position
         {
             get { return _position; }
@@ -42,6 +51,9 @@ namespace TSLibrary
             set { _position.Y = value; }
         }
 
+        /// <summary>
+        /// Chiều rộng của đối tượng
+        /// </summary>
         public virtual int Width
         {
             get { return _width; }
@@ -53,6 +65,9 @@ namespace TSLibrary
             }
         }
 
+        /// <summary>
+        /// Chiều cao của đối tượng
+        /// </summary>
         public virtual int Height
         {
             get { return _height; }

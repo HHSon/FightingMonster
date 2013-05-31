@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TSLibrary.VisibleEntity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TSLibrary.Control;
-using TSLibrary.VisibleEntity.Control;
+using TSLibrary.ui.Control;
 using TSLibrary.Input;
+using TSLibrary.ui.Control.ControlManager;
 
-namespace TSLibrary.Layout
+namespace TSLibrary.ui.Control.Layout
 {
     public class TSLayout : TSControl
     {
@@ -18,6 +17,7 @@ namespace TSLibrary.Layout
         protected EventHandler _sizeChange;
 
         protected Texture2D _backgroundImage;
+
 
 
         #region Property Region
@@ -130,14 +130,17 @@ namespace TSLibrary.Layout
 
         #endregion
 
-        #region Constructor
+
 
         public TSLayout()
         {
             _controlManager = new TSControlManager();
         }
 
-        #endregion
+        public void Add(TSControl control)
+        {
+            ControlManager.Add(control);
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -160,6 +163,21 @@ namespace TSLibrary.Layout
 
 
             ControlManager.DrawControls(gameTime, spriteBatch);
+        }
+
+        public override void OnParentPositionChange(EventArgs e)
+        {
+            base.OnParentPositionChange(e);
+            ControlManager.ParentWidth = this.Width;
+            ControlManager.ParentHeight = this.Height;
+            ControlManager.OnParentPositionChange(e);
+        }
+
+        public override void OnParentSizeChange(EventArgs e)
+        {
+            base.OnParentSizeChange(e);
+            ControlManager.ParentPositionOnScreen = this.PositionOnScreen;
+            ControlManager.OnParentSizeChange(e);
         }
 
         public void OnPositionChange(EventArgs e)

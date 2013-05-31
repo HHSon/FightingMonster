@@ -92,22 +92,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Control\TSButton.cs" />
-    <Compile Include="Control\TSControl.cs" />
-    <Compile Include="Control\TSControlManager.cs" />
-    <Compile Include="Control\TSLabel.cs" />
-    <Compile Include="Control\TSMarginType.cs" />
-    <Compile Include="Layout\TSLayout.cs" />
+    <Compile Include="Map\TSMap.cs" />
+    <Compile Include="Map\TSTile.cs" />
+    <Compile Include="ui\Control\TSButton.cs" />
+    <Compile Include="ui\Control\TSControl.cs" />
+    <Compile Include="ui\Control\TSControlManager.cs" />
+    <Compile Include="ui\Control\TSLabel.cs" />
+    <Compile Include="ui\Control\TSMarginType.cs" />
+    <Compile Include="ui\Control\TSPictureBox.cs" />
+    <Compile Include="ui\Control\TSProgressBar.cs" />
+    <Compile Include="ui\Layout\TSLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Screen\TSScreen.cs" />
-    <Compile Include="Screen\TSScreenManager.cs" />
+    <Compile Include="ui\Screen\TSScreen.cs" />
+    <Compile Include="ui\Screen\TSScreenManager.cs" />
     <Compile Include="TSGameEntity.cs" />
     <Compile Include="Input\TSInputHandler.cs" />
     <Compile Include="TSInvisibleGameEntity.cs" />
     <Compile Include="TSVisibleGameEntity.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

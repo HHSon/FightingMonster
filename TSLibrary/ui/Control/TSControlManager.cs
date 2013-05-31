@@ -5,12 +5,16 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using TSLibrary.Control;
+using TSLibrary.ui.Control;
 using TSLibrary.Input;
-using TSLibrary.Layout;
+using TSLibrary.ui.Control.Layout;
 
-namespace TSLibrary.VisibleEntity.Control
+
+namespace TSLibrary.ui.Control.ControlManager
 {
+    /// <summary>
+    /// Chịu trách nhiệm quản lý các control con trong một layout hay một sreen
+    /// </summary>
     public class TSControlManager : TSInvisibleGameEntity
     {
         public int ParentWidth { get; set; }
@@ -18,12 +22,11 @@ namespace TSLibrary.VisibleEntity.Control
         public Vector2 ParentPositionOnScreen { get; set; }
 
         private List<TSControl> _controls;
-        private bool _updateEnabled;
 
 
         protected TSControl lastMouseHoverControl;
         protected TSControl lastMousePressControl;
-
+        protected TSControl focusingControl;
 
         #region Property Region
 
@@ -33,13 +36,6 @@ namespace TSLibrary.VisibleEntity.Control
             protected set { _controls = value; }
         }
 
-        public bool UpdateEnabled
-        {
-            get { return _updateEnabled; }
-            set { _updateEnabled = value; }
-
-        }
-
         #endregion
 
         
@@ -47,7 +43,6 @@ namespace TSLibrary.VisibleEntity.Control
         public TSControlManager()
         {
             _controls = new List<TSControl>();
-            _updateEnabled = true;
         }
 
         public void Add(TSControl control)
@@ -58,7 +53,7 @@ namespace TSLibrary.VisibleEntity.Control
                 control.ParentControlManager = this;
 
                 if (control is TSLayout)
-                    ((TSLayout)control).ControlManager.UpdateEnabled = false;
+                    ((TSLayout)control).ControlManager.Enabled = false;
             }
         }
 
@@ -72,17 +67,21 @@ namespace TSLibrary.VisibleEntity.Control
 
         public override void Update(GameTime gameTime)
         {
-            foreach (TSControl control in Controls)
-                control.Update(gameTime);
+            if (Enabled == true)
+            {
+                foreach (TSControl control in Controls)
+                    control.Update(gameTime);
 
-            UpdateMouseEvent(gameTime);
+                UpdateMouseEvent(gameTime);
+                UpdateKeyboardEvent(gameTime);
+            }
         }
 
         protected void UpdateMouseEvent(GameTime gameTime)
         {
             TSControl mouseHoverControl = null;
 
-            if (UpdateEnabled == false)
+            if (Enabled == false)
                 return;
 
             mouseHoverControl = FindMouseHoverControl();
@@ -95,9 +94,9 @@ namespace TSLibrary.VisibleEntity.Control
                     {
                         TSLayout mouseHoverLayout = ((TSLayout)lastMouseHoverControl);
 
-                        mouseHoverLayout.ControlManager.UpdateEnabled = true;
+                        mouseHoverLayout.ControlManager.Enabled = true;
                         mouseHoverLayout.ControlManager.Update(gameTime);
-                        mouseHoverLayout.ControlManager.UpdateEnabled = false;
+                        mouseHoverLayout.ControlManager.Enabled = false;
                     }
 
                     lastMouseHoverControl = null;
@@ -109,9 +108,9 @@ namespace TSLibrary.VisibleEntity.Control
             {
                 TSLayout mouseHoverLayout = ((TSLayout)mouseHoverControl);
 
-                mouseHoverLayout.ControlManager.UpdateEnabled = true;
+                mouseHoverLayout.ControlManager.Enabled = true;
                 mouseHoverLayout.ControlManager.Update(gameTime);
-                mouseHoverLayout.ControlManager.UpdateEnabled = false;
+                mouseHoverLayout.ControlManager.Enabled = false;
 
                 lastMouseHoverControl = mouseHoverControl;
             }
@@ -158,7 +157,51 @@ namespace TSLibrary.VisibleEntity.Control
                 {
                     mouseHoverControl.OnMouseClick(null);
                     lastMousePressControl = mouseHoverControl;
+
+                    if ((focusingControl != null) && (focusingControl == mouseHoverControl))
+                    {
+                        return;
+                    }
+
+                    if (focusingControl != null)
+                        focusingControl.OnFocusLeave(null);
+
+                    focusingControl = mouseHoverControl;
+                    focusingControl.OnFocusEnter(null);
                 }
+        }
+
+        protected void UpdateKeyboardEvent(GameTime gameTime)
+        {
+            if (Enabled == false)
+                return;
+
+            if (focusingControl == null)
+                return;
+
+            Keys[] pressedKey = TSInputHandler.KeyboardState.GetPressedKeys();
+            Keys[] lastPressedKey = TSInputHandler.LastKeyboardState.GetPressedKeys();
+
+
+            if ((pressedKey == null) && (lastPressedKey == null))
+                return;
+
+            if ((pressedKey.Length == 0) && (lastPressedKey.Length == 0))
+                return;
+
+
+            if ((pressedKey == null) || (pressedKey.Length == 0))
+                if (lastPressedKey != null && lastPressedKey.Length > 0)
+                    focusingControl.OnKeyUp(null);
+
+            if ((pressedKey != null) && (pressedKey.Length > 0))
+            {
+                if (lastPressedKey != null && lastPressedKey.Length > 0 && pressedKey.Length == lastPressedKey.Length)
+                    focusingControl.OnKeyDown(null);
+                else
+                    focusingControl.OnKeyPress(null);
+            }
+
         }
 
         protected TSControl FindMouseHoverControl()

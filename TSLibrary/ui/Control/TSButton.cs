@@ -5,8 +5,11 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace TSLibrary.Control
+namespace TSLibrary.ui.Control.Button
 {
+    /// <summary>
+    /// Lớp đối tượng tạo các button
+    /// </summary>
     public class TSButton : TSControl
     {
         protected Texture2D _backgroundImage;
@@ -114,45 +117,33 @@ namespace TSLibrary.Control
             _textColor = Color.Black;
         }
 
-        Rectangle tempSrcRect = new Rectangle();
-        Rectangle tempDestRect = new Rectangle();
+        private Rectangle tempSrcRect = new Rectangle();
+        private Rectangle tempDestRect = new Rectangle();
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            tempSrcRect.X = (int)PositionOnScreenX;
-            tempSrcRect.Y = (int)PositionOnScreenY;
-            tempSrcRect.Width = Width;
-            tempSrcRect.Height = Height;
-
-            int widthToDraw;
-
-            if ((ParentControlManager.ParentPositionOnScreen.X + ParentControlManager.ParentWidth) <
-                (PositionOnScreenX + Width))
-                widthToDraw = (int)(ParentControlManager.ParentPositionOnScreen.X + ParentControlManager.ParentWidth - PositionOnScreenX);
-            else
-                widthToDraw = Width;
-
-            int heightToDraw;
-            if ((ParentControlManager.ParentPositionOnScreen.Y + ParentControlManager.ParentHeight) <
-                (PositionOnScreenY + Height))
-                heightToDraw = (int)(ParentControlManager.ParentPositionOnScreen.Y + ParentControlManager.ParentHeight - PositionOnScreenY);
-            else
-                heightToDraw = Height;
-
-            if (widthToDraw < 0 || heightToDraw < 0)
+            if (Visibled == false)
                 return;
 
-            tempDestRect.X = (int)PositionOnScreenX;
-            tempDestRect.Y = (int)PositionOnScreenY;
-            tempDestRect.Width = widthToDraw;
-            tempDestRect.Height = heightToDraw;
+            if (needCalculateSizeToDraw == true)
+            {
+                tempSrcRect.X = (int)PositionOnScreenX;
+                tempSrcRect.Y = (int)PositionOnScreenY;
+                tempSrcRect.Width = Width;
+                tempSrcRect.Height = Height;
 
 
-            if (Visibled)
-                if (currentImage != null)
-                    spriteBatch.Draw(currentImage, tempDestRect, tempSrcRect, Color.White);
+                tempDestRect.X = (int)PositionOnScreenX;
+                tempDestRect.Y = (int)PositionOnScreenY;
+                GetWidthAndHeightToDraw(ref tempDestRect.Width, ref tempDestRect.Height);
 
+                if ((tempDestRect.Width < 0) || (tempDestRect.Height < 0))
+                    return;
+            }
 
+            
+            if (currentImage != null)
+                spriteBatch.Draw(currentImage, tempDestRect, tempSrcRect, Color.White);
 
 
             // draw text
@@ -160,8 +151,8 @@ namespace TSLibrary.Control
                 if (String.IsNullOrEmpty(Text) == false)
                 {
                     Vector2 messureString = currrentFont.MeasureString(Text);
-                    int x = (int)PositionOnScreenX + (Width / 2 - (int)messureString.X / 2);
-                    int y = (int)PositionOnScreenY + (Height / 2 - (int)messureString.Y / 2);
+                    int x = (int)PositionOnScreenX + (Width - (int)messureString.X) / 2;
+                    int y = (int)PositionOnScreenY + (Height - (int)messureString.Y) / 2;
 
                     spriteBatch.DrawString(
                         currrentFont,
@@ -173,6 +164,7 @@ namespace TSLibrary.Control
 
         public override void OnMouseClick(EventArgs e)
         {
+            currrentFont = _clickedFont;
             currentImage = _actionPerformedImage;
             base.OnMouseClick(e);
         }
@@ -184,18 +176,21 @@ namespace TSLibrary.Control
 
         public override void OnMouseUp(EventArgs e)
         {
+            currrentFont = _focusedFont;
             currentImage = _focusedImage;
             base.OnMouseUp(e);
         }
 
         public override void OnMouseEnter(EventArgs e)
         {
+            currrentFont = _focusedFont;
             currentImage = _focusedImage;
             base.OnMouseEnter(e);
         }
 
         public override void OnMouseLeave(EventArgs e)
         {
+            currrentFont = _font;
             currentImage = _backgroundImage;
             base.OnMouseLeave(e);
         }

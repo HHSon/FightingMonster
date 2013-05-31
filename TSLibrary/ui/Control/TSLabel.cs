@@ -5,13 +5,17 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TSLibrary.Control
+namespace TSLibrary.ui.Control.Label
 {
+    /// <summary>
+    /// Đối tượng tạo layout
+    /// </summary>
     public class TSLabel : TSControl
     {
         private string _text;
         private Color _textColor;
         private SpriteFont _font;
+
 
         #region Property Region
 
@@ -34,6 +38,7 @@ namespace TSLibrary.Control
         }
 
         #endregion
+
 
 
         public TSLabel()

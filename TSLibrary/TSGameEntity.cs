@@ -6,26 +6,32 @@ using Microsoft.Xna.Framework;
 
 namespace TSLibrary
 {
+    /// <summary>
+    /// Đối tượng gốc mà các đối tượng khác kế thừa
+    /// </summary>
     public abstract class TSGameEntity
     {
         protected bool _enabled = true;
 
-
-        #region Property Region
-
+        /// <summary>
+        /// Cho phép đối tượng có được update hay không
+        /// </summary>
         public virtual bool Enabled
         {
             get { return _enabled; }
             set { _enabled = value; }
         }
 
-        #endregion
-
-
+        /// <summary>
+        /// Khởi tạo các dữ liệu trong lớp
+        /// </summary>
         public virtual void Initialize() 
         {
         }
 
+        /// <summary>
+        /// Cập nhập đối tượng
+        /// </summary>
         public virtual void Update(GameTime gameTime)
         {
         }

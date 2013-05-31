@@ -11,24 +11,27 @@ using Microsoft.Xna.Framework.Media;
 using FightingMonters.Screen;
 using TSLibrary.Input;
 using FightingMonster.ResourceHelper;
+using FightingMonster.Screen;
+using TSLibrary.ui.Screen.ScreenManager;
+using TSLibrary.ui.Control.Screen;
+
 
 
 namespace FightingMonter
 {
     public class FightingMonsterGame : Microsoft.Xna.Framework.Game
     {
-        StartScreen startScreen;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
 
-        
+        TestScreen screen;
+        TSScreenManager screenManager;
+
         public FightingMonsterGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            //graphics.IsFullScreen = true;
 
             if (graphics.IsFullScreen == true)
             {
@@ -43,9 +46,11 @@ namespace FightingMonter
         {
             TSInputHandler.Initialize();
 
-            startScreen = new StartScreen(graphics);
-            startScreen.Initialize();
-           
+            screen = new TestScreen(graphics);
+
+
+            screenManager = new TSScreenManager();
+            screenManager.Add(screen);
             base.Initialize();
         }
 
@@ -53,21 +58,18 @@ namespace FightingMonter
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            ControlHelper.GetInstance().LoadContent(Content);
-            startScreen.LoadContent(Content);
+            screen.LoadContent(Content);
         }
 
         protected override void UnloadContent()
         {
+            
         }
 
         protected override void Update(GameTime gameTime)
         {
-            TSInputHandler.Update(gameTime);  // !: update đầu tiên
-
-            startScreen.Update(gameTime);
-
+            TSInputHandler.Update(gameTime);
+            screenManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -76,7 +78,7 @@ namespace FightingMonter
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            startScreen.Draw(gameTime, spriteBatch);
+            screenManager.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

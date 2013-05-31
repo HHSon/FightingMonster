@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using TSLibrary.VisibleEntity.Control;
+using TSLibrary.ui.Control.ControlManager;
+using TSLibrary.ui.Control.MarginType;
 
-namespace TSLibrary.Control
+
+namespace TSLibrary.ui.Control
 {
+    /// <summary>
+    /// Lớp control gốc
+    /// </summary>
     public abstract class TSControl : TSVisibleGameEntity
     {
         protected Vector2 _positionOnScreen;
@@ -28,6 +33,13 @@ namespace TSLibrary.Control
 
         protected EventHandler _parentPositionChange;
         protected EventHandler _parentSizeChange;
+
+        protected EventHandler _keyPress;
+        protected EventHandler _keyDown;
+        protected EventHandler _keyUp;
+
+        protected EventHandler _focusEnter;
+        protected EventHandler _focusLeave;
 
 
         #region Property Region
@@ -191,9 +203,39 @@ namespace TSLibrary.Control
             set { _mouseLeave = value; }
         }
 
+        public EventHandler KeyPress
+        {
+            get { return _keyPress; }
+            set { _keyPress = value; }
+        }
+
+        public EventHandler KeyDown
+        {
+            get { return _keyDown; }
+            set { _keyDown = value; }
+        }
+
+        public EventHandler KeyUp
+        {
+            get { return _keyUp; }
+            set { _keyUp = value; }
+        }
+
+
+        public EventHandler FocusEnter
+        {
+            get { return _focusEnter; }
+            set { _focusEnter = value; }
+        }
+
+        public EventHandler FocusLeave
+        {
+            get { return _focusLeave; }
+            set { _focusLeave = value; }
+        }
         #endregion
 
-
+        protected bool needCalculateSizeToDraw;
         
         public TSControl()
         {
@@ -221,10 +263,115 @@ namespace TSLibrary.Control
             return true;
         }
 
+        public virtual void OnMouseEnter(EventArgs e)
+        {
+            if (_mouseEnter != null)
+                _mouseEnter(this, e);
+        }
+
+        public virtual void OnMouseMove(EventArgs e)
+        {
+            if (_mouseMove != null)
+                _mouseMove(this, e);
+        }
+
+        public virtual void OnMouseLeave(EventArgs e)
+        {
+            if (_mouseLeave != null)
+                _mouseLeave(this, e);
+        }
+
+        public virtual void OnMouseClick(EventArgs e)
+        {
+            if (_mouseClick != null)
+                _mouseClick(this, e);
+        }
+
+        public virtual void OnMouseDown(EventArgs e)
+        {
+            if (_mouseDown != null)
+                _mouseDown(this, e);
+        }
+
+        public virtual void OnMouseUp(EventArgs e)
+        {
+            if (_mouseUp != null)
+                _mouseUp(this, e);
+        }
+
+        public virtual void OnKeyPress(EventArgs e)
+        {
+            if (_keyPress != null)
+                _keyPress(this, e);
+        }
+
+        public virtual void OnKeyDown(EventArgs e)
+        {
+            if (_keyDown != null)
+                _keyDown(this, e);
+        }
+
+        public virtual void OnKeyUp(EventArgs e)
+        {
+            if (_keyUp != null)
+                _keyUp(this, e);
+        }
+
+        public virtual void OnFocusEnter(EventArgs e)
+        {
+            if (_focusEnter != null)
+                _focusEnter(this, e);
+        }
+
+        public virtual void OnFocusLeave(EventArgs e)
+        {
+            if (_focusLeave != null)
+                _focusLeave(this, e);
+        }
+
+        protected void GetWidthAndHeightToDraw(ref int widthToDraw, ref int heightToDraw)
+        {
+            if (ParentControlManager == null)
+            {
+                widthToDraw = Width;
+                heightToDraw = Height;
+                return;
+            }
+
+            if ((ParentControlManager.ParentPositionOnScreen.X + ParentControlManager.ParentWidth) <
+                (PositionOnScreenX + Width))
+                widthToDraw = (int)(ParentControlManager.ParentPositionOnScreen.X + ParentControlManager.ParentWidth - PositionOnScreenX);
+            else
+                widthToDraw = Width;
+
+            if ((ParentControlManager.ParentPositionOnScreen.Y + ParentControlManager.ParentHeight) <
+                (PositionOnScreenY + Height))
+                heightToDraw = (int)(ParentControlManager.ParentPositionOnScreen.Y + ParentControlManager.ParentHeight - PositionOnScreenY);
+            else
+                heightToDraw = Height;
+        }
+
+        public virtual void OnParentPositionChange(EventArgs e)
+        {
+            if (_parentPositionChange != null)
+                _parentPositionChange(this, e);
+
+            CalculatePositionAndSize();
+        }
+
+        public virtual void OnParentSizeChange(EventArgs e)
+        {
+            if (_parentSizeChange != null)
+                _parentSizeChange(this, e);
+
+            CalculatePositionAndSize();
+        }
+
         protected void CalculatePositionAndSize()
         {
             CalculatePositionXAndWidth();
             CalculatePositionYAndHeight();
+            needCalculateSizeToDraw = true;
         }
 
         protected void CalculatePositionXAndWidth()
@@ -299,58 +446,6 @@ namespace TSLibrary.Control
                 _positionOnScreen.Y = _position.Y + _parentControlManager.ParentPositionOnScreen.Y;
             else
                 _positionOnScreen.Y = _position.Y;
-        }
-
-        public virtual void OnMouseEnter(EventArgs e)
-        {
-            if (_mouseEnter != null)
-                _mouseEnter(this, e);
-        }
-
-        public virtual void OnMouseMove(EventArgs e)
-        {
-            if (_mouseMove != null)
-                _mouseMove(this, e);
-        }
-
-        public virtual void OnMouseLeave(EventArgs e)
-        {
-            if (_mouseLeave != null)
-                _mouseLeave(this, e);
-        }
-
-        public virtual void OnMouseClick(EventArgs e)
-        {
-            if (_mouseClick != null)
-                _mouseClick(this, e);
-        }
-
-        public virtual void OnMouseDown(EventArgs e)
-        {
-            if (_mouseDown != null)
-                _mouseDown(this, e);
-        }
-
-        public virtual void OnMouseUp(EventArgs e)
-        {
-            if (_mouseUp != null)
-                _mouseUp(this, e);
-        }
-
-        public virtual void OnParentPositionChange(EventArgs e)
-        {
-            if (_parentPositionChange != null)
-                _parentPositionChange(this, e);
-
-            CalculatePositionAndSize();
-        }
-
-        public virtual void OnParentSizeChange(EventArgs e)
-        {
-            if (_parentSizeChange != null)
-                _parentSizeChange(this, e);
-
-            CalculatePositionAndSize();
         }
     }
 }

@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{75651B1A-C8EB-4DF6-A73A-08B078FFA1DE}</ProjectGuid>
+    <ProjectGuid>{6C44B95D-A764-4C4F-A8D8-1808564D112D}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FightingMonster</RootNamespace>
-    <AssemblyName>FightingMonster</AssemblyName>
+    <RootNamespace>TestProject</RootNamespace>
+    <AssemblyName>TestProject</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
     <XnaProfile>HiDef</XnaProfile>
-    <XnaCrossPlatformGroupID>d0e053b8-f345-4801-a573-d422b4d51a36</XnaCrossPlatformGroupID>
+    <XnaCrossPlatformGroupID>e7dac9fb-0731-4abb-8e0e-2cc728f8b34d</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
@@ -107,28 +107,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ResourceHelper\ControlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="FightingMonsterGame.cs" />
-    <Compile Include="Screen\AboutScreen.cs" />
-    <Compile Include="Screen\StartScreen.cs" />
-    <Compile Include="Screen\TestScreen.cs" />
-    <Compile Include="Sprite\TSTextureArray.cs" />
+    <Compile Include="Game1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TSLibrary\TSLibrary.csproj">
-      <Project>{0F87B75B-C732-48B6-90FF-2B42A873023D}</Project>
-      <Name>TSLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FightingMonsterContent\FightingMonsterContent.contentproj">
-      <Name>FightingMonsterContent %28Content%29</Name>
+    <ProjectReference Include="..\TestProjectContent\TestProjectContent.contentproj">
+      <Name>TestProjectContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
-      <Project>{CEEA2F86-1884-4F81-8756-84A32D955B00}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

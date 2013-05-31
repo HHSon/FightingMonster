@@ -41,10 +41,9 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Compile Include="Font\Control\Button\NormalFont.spritefont">
-      <Name>NormalFont</Name>
+    <Compile Include="Font\Control\Button\FocusedFont.spritefont">
+      <Name>FocusedFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
@@ -77,6 +76,39 @@
     </Compile>
     <Compile Include="Image\Screen\Background.jpg">
       <Name>Background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Font\Control\Button\ClickedFont.spritefont">
+      <Name>ClickedFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Font\Control\StandardFont.spritefont">
+      <Name>StandardFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Image\Control\ProgressBar\Background.png">
+      <Name>Background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Image\Control\ProgressBar\Progress.png">
+      <Name>Progress</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Image\Map\Untitled.png">
+      <Name>Untitled</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
