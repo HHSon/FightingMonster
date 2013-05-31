@@ -24,7 +24,7 @@ namespace FightingMonter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        TestScreen screen;
+        StartScreen startScreen;
         TSScreenManager screenManager;
 
         public FightingMonsterGame()
@@ -45,12 +45,11 @@ namespace FightingMonter
         protected override void Initialize()
         {
             TSInputHandler.Initialize();
+            startScreen = new StartScreen(graphics);
+            startScreen.Initialize();
 
-            screen = new TestScreen(graphics);
-
-
-            screenManager = new TSScreenManager();
-            screenManager.Add(screen);
+            screenManager = new TSScreenManager(this);
+            screenManager.Add(startScreen);
             base.Initialize();
         }
 
@@ -58,7 +57,8 @@ namespace FightingMonter
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            screen.LoadContent(Content);
+            ControlHelper.GetInstance().LoadContent(Content);
+            startScreen.LoadContent(Content);
         }
 
         protected override void UnloadContent()

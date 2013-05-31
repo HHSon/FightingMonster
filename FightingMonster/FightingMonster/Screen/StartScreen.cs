@@ -11,6 +11,7 @@ using TSLibrary.ui.Control.Button;
 using TSLibrary.ui.Control.Label;
 using TSLibrary.ui.Control.Layout;
 using FightingMonster.Screen;
+using TSLibrary.ui.Control.MarginType;
 
 namespace FightingMonters.Screen
 {
@@ -39,15 +40,15 @@ namespace FightingMonters.Screen
             lblMessage.MarginLeft = 50;
             lblMessage.MarginTop = 80;
             lblMessage.TextColor = Color.White;
-            this.ControlManager.Add(lblMessage);
+            this.Add(lblMessage);
 
 
             menuLayout = new TSLayout();
-            menuLayout.MarginLeft = -200;
-            menuLayout.MarginBottom = 0;
+            menuLayout.MarginLeft = TSMarginType.CENTER; //-200;
+            menuLayout.MarginBottom = TSMarginType.CENTER; //= 0;
             menuLayout.Width = 180;
             menuLayout.Height = 230;
-            this.ControlManager.Add(menuLayout);
+            this.Add(menuLayout);
 
 
             btnStartGame = new TSButton("Bắt đầu");
@@ -100,7 +101,7 @@ namespace FightingMonters.Screen
             if (content == null)
                 return;
 
-            _backgroundImage = content.Load<Texture2D>(@"Image/Screen/Background");
+            _backgroundImage = content.Load<Texture2D>(@"Image/Screen/trine_puzzle_video_game");
 
             ControlHelper controlResourceHelper = ControlHelper.GetInstance();
 
@@ -120,11 +121,11 @@ namespace FightingMonters.Screen
             if (Enabled == false)
                 return;
 
-            delta += 2;
+            /*delta += 2;
             if (menuLayout.MarginLeft < 30)
             {
                 menuLayout.MarginLeft += delta;
-            }
+            }*/
 
             base.Update(gameTime);
         }
@@ -139,6 +140,7 @@ namespace FightingMonters.Screen
 
         public void btnExitGame_Click(object sender, EventArgs e)
         {
+            this.ScreenManager.ExitGame();
         }
 
         public void btnStartGame_Click(object sender, EventArgs e)
@@ -168,7 +170,6 @@ namespace FightingMonters.Screen
         public void btnAbout_Click(object sender, EventArgs e)
         {
             lblMessage.Text = "Sinh viên thực hiện 1012355 - 1012435";
-            this._graphics.ToggleFullScreen();
         }
     }
 }

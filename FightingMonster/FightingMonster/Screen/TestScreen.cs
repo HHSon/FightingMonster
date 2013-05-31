@@ -19,7 +19,8 @@ namespace FightingMonster.Screen
 {
     public class TestScreen : TSScreen
     {
-        TSMap map;
+        private TSMap map;
+        private TSButton btnClose;
         
         public TestScreen(GraphicsDeviceManager graphics)
             : base(graphics)
@@ -30,13 +31,21 @@ namespace FightingMonster.Screen
 
         public override void Initialize()
         {
-            
+            btnClose = new TSButton("Đóng");
+            btnClose.Width = 100;
+            btnClose.Height = 30;
+            btnClose.MarginRight = 1;
+            btnClose.MarginTop = 1;
+            btnClose.MouseClick += btnClose_Click;
+            this.Add(btnClose);
         }
 
         public override void LoadContent(ContentManager content)
         {
+            ControlHelper.GetInstance().ToStandardButton(btnClose);
+
             map = new TSMap(100, 100, this.Width, this.Height);
-            map.TileBackground = content.Load<Texture2D>(@"Image/Map/Untitled");
+            map.TileBackground = content.Load<Texture2D>(@"Image/Map/grass");
             map.LoadContent(content);
         }
 
@@ -49,8 +58,13 @@ namespace FightingMonster.Screen
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            base.Draw(gameTime, spriteBatch);
             map.Draw(gameTime, spriteBatch);
+            base.Draw(gameTime, spriteBatch);
+        }
+
+        public void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

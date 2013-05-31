@@ -11,10 +11,8 @@ namespace TSLibrary.ui.Screen.ScreenManager
 {
     public class TSScreenManager : TSInvisibleGameEntity
     {
-        /// <summary>
-        /// Danh sách màn hình cần quản lý
-        /// </summary>
         private List<TSScreen> _screens;
+        private Game game;
         
 
         #region Property Region
@@ -34,8 +32,9 @@ namespace TSLibrary.ui.Screen.ScreenManager
         /// <summary>
         /// Khởi tạo lớp quản lý màn hình. Số lượng màn hình đang quản lý là 0
         /// </summary>
-        public TSScreenManager()
+        public TSScreenManager(Game game)
         {
+            this.game = game;
             _screens = new List<TSScreen>();
         }
 
@@ -106,6 +105,12 @@ namespace TSLibrary.ui.Screen.ScreenManager
 
             _screens.RemoveAt(screenIndex);
             screenToClose.Visibled = true;
+        }
+
+        public void ExitGame()
+        {
+            if (game != null)
+                game.Exit();
         }
     }
 }
