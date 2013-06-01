@@ -164,5 +164,7 @@ namespace TSLibrary.Map
                         (col - CurrentTileColumn) * TileWidth, 
                         (row - CurrentTileRow) * TileHeight);
         }
+
+
     }
 }
