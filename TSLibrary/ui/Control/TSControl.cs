@@ -12,7 +12,7 @@ namespace TSLibrary.ui.Control
     /// <summary>
     /// Lớp control gốc
     /// </summary>
-    public abstract class TSControl : TSVisibleGameEntity
+    public abstract class TSControl : TSVisibleGameObject
     {
         protected Vector2 _positionOnScreen;
 

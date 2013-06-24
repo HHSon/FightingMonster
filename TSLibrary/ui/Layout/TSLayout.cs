@@ -144,6 +144,9 @@ namespace TSLibrary.ui.Control.Layout
 
         public override void Update(GameTime gameTime)
         {
+            if (Enabled == false)
+                return;
+
             ControlManager.Update(gameTime);
         }
 

@@ -25,7 +25,7 @@ namespace FightingMonters.Screen
         private TSLabel  lblMessage;
 
         private TSLayout menuLayout;
-        private int delta = 0;
+
 
         public StartScreen(GraphicsDeviceManager graphics) 
             : base(graphics)

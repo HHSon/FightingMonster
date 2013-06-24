@@ -9,6 +9,9 @@ Content\Image\Control\Layout\Background.xnb
 Content\Image\Screen\Background.xnb
 Content\Image\Control\ProgressBar\Background.xnb
 Content\Image\Control\ProgressBar\Progress.xnb
-Content\Image\Map\Untitled.xnb
-Content\Image\Map\grass.xnb
 Content\Image\Screen\trine_puzzle_video_game.xnb
+Content\Map\Resource\terrain_atlas.xnb
+Content\Map\Resource\magecity.xnb
+Content\Map\Resource\PathAndObjects_0.xnb
+Content\Map\lv01.tmx
+Content\Map\testmap.xml

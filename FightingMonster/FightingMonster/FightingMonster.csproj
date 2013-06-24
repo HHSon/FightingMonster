@@ -114,7 +114,6 @@
     <Compile Include="Screen\AboutScreen.cs" />
     <Compile Include="Screen\StartScreen.cs" />
     <Compile Include="Screen\TestScreen.cs" />
-    <Compile Include="Sprite\TSTextureArray.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

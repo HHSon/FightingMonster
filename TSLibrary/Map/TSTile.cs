@@ -10,9 +10,9 @@ namespace TSLibrary.Map
 {
     public class TSTile
     {
-        private Texture2D _background;
-        private int _width;
-        private int _height;
+        protected Texture2D _background;
+        protected TSTileType _type;
+
 
         #region Property Region
 
@@ -26,38 +26,25 @@ namespace TSLibrary.Map
         }
 
         /// <summary>
-        /// Chiều rộng của ô
+        /// Kiểu của ô
         /// </summary>
-        public int Width
+        public TSTileType Type
         {
-            get { return _width; }
-            set { _width = value; }
-        }
-
-        /// <summary>
-        /// Chiều cao của ô
-        /// </summary>
-        public int Height
-        {
-            get { return _height; }
-            set { _height = value; }
+            get { return _type; }
+            set { _type = value; }
         }
 
         #endregion
 
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, int pX, int pY)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, 
+                                int pX, int pY, int width, int height)
         {
             if (_background != null)
-                spriteBatch.Draw(_background, new Rectangle(pX, pY, _width, _height), Color.White);
+                spriteBatch.Draw(
+                    _background,
+                    new Rectangle(pX, pY, width, height),
+                    Color.White);
         }
-    }
-
-    public enum TSTileType : int
-    {
-        Accessible,
-        Unaccessible,
-        HPReduction,
-        MNReduction
     }
 }

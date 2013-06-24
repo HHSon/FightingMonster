@@ -13,7 +13,7 @@ namespace TSLibrary.Map
     /// Lớp bản đồ được sử dụng để tạo bản đồ cho các màn chơi. Bản đồ
     /// được tạo thành từ một mảng hai chiều các ô nhỏ.
     /// </summary>
-    public class TSMap : TSVisibleGameObject
+    public class TSMap : TSVisibleGameEntity
     {
         protected Vector2 _P0;
         protected int _numRows;
@@ -80,29 +80,22 @@ namespace TSLibrary.Map
 
         #endregion
 
-
-        protected int numRowsOnScreen;
-        protected int numColumnsOnScreen;
+        protected int nColToDraw;
+        protected int nRowToDraw;
         protected Vector2 maxP0;
 
 
-        public TSMap(int screenWidth, int screenHeight)
-        {
-            if (screenWidth < 0)
-                throw new ArgumentException("Biến screenWidth = " + screenWidth);
 
-            if (screenHeight < 0)
-                throw new ArgumentException("Biến screenHeight = " + screenHeight);
-
-            _width = screenWidth;
-            _height = screenHeight;
-        }
 
         /// <summary>
         /// Khởi tạo bản đồ
         /// </summary>
         /// <param name="numRows">Số dòng của bản đồ</param>
         /// <param name="numColumns">Số cột của bản đồ</param>
+        /// <param name="tileWidth">Chiều rộng của 1 ô</param>
+        /// <param name="tileHeight">Chiều cao của 1 ô</param>
+        /// <param name="screenWidth">Chiều rộng của màn hình</param>
+        /// <param name="screenHeight">Chiều cao của màn hình</param>
         public TSMap(int numRows, int numColumns, int tileWidth, int tileHeight,
                           int screenWidth, int screenHeight)
         {
@@ -118,8 +111,8 @@ namespace TSLibrary.Map
             _width = screenWidth;
             _height = screenHeight;
 
-            numRowsOnScreen = (screenHeight / _tileHeight) + 2;   // số dòng vẽ trên màn hình
-            numColumnsOnScreen = (screenWidth / _tileWidth) + 2;     // số cột vẽ trên man hình
+            nRowToDraw = (_height / _tileHeight) + 3;   // số dòng vẽ trên màn hình
+            nColToDraw = (_width / _tileWidth) + 3;     // số cột vẽ trên man hình
 
             maxP0.X = (_numColumns * _tileWidth) - screenWidth;
             maxP0.Y = (_numRows * _tileHeight) - screenHeight;
@@ -129,113 +122,67 @@ namespace TSLibrary.Map
 
             if (maxP0.Y < 0)
                 maxP0.Y = 0;
+
+            InitTiles();
         }
 
-
-        public virtual void LoadContent(String mapDefFile, ContentManager content)
+        protected void InitTiles()
         {
-            if (mapDefFile == null)
-                return;
+            _tiles = new TSTile[_numRows, _numColumns];
 
+            for (int row = 0; row < _numRows; row++)
+                for (int col = 0; col < _numColumns; col++)
+                    Tiles[row, col] = new TSTile();
+        }
+
+        public void LoadContent(ContentManager content)
+        {
             if (content != null)
             {
-                TSMapHelper mapHelper = new TSMapHelper();
-                mapHelper.LoadMapInfo(mapDefFile, content);
-
-                _numRows = mapHelper.NumRows;
-                _numColumns = mapHelper.NumColumns;
-
-                _tileWidth = mapHelper.TileWidth;
-                _tileHeight = mapHelper.TileHeight;
-
-                _tiles = new TSTile[_numRows, _numColumns];
-
-                for (int row = 0; row < _numRows; row++)
-                    for (int col = 0; col < _numColumns; col++)
-                    {
-                        _tiles[row, col] = new TSTile();
-                        _tiles[row, col].Background = mapHelper.TileList[mapHelper.TileMatrix[row, col]];
-                        _tiles[row, col].Type = mapHelper.AccessibleMatrix[row, col];
-                    }
-
-                InitAdditionalInfo();
+                for (int row = 0; row < NumRows; row++)
+                    for (int col = 0; col < NumColumns; col++)
+                        _tiles[row, col].Background = content.Load<Texture2D>(@"Image/Map/blueimage");
             }
-        }
-
-        public TSTile GetTile(int row, int col)
-        {
-            if ((row < 0) || (row >= NumRows))
-                return null;
-
-            if ((col < 0) || (col >= NumColumns))
-                return null;
-
-            return Tiles[row, col];
-        }
-
-        /*public Vector2 GetTileIndex(Vector2 position)
-        {
-            Vector2 vector = new Vector2();
-        }*/
-
-        /*public bool IsInDrawnArea(Vector2 position)
-        {
-            return false;
-        }*/
-
-        /*public Vector2[] GetPath(Vector2 position, Vector2 destPosition)
-        {
-            return null;
-        }*/
-
-        protected void InitAdditionalInfo()
-        {
-            numRowsOnScreen = (Height / _tileHeight) + 2;   // số dòng vẽ trên màn hình
-            numColumnsOnScreen = (Width / _tileWidth) + 2;     // số cột vẽ trên man hình
-
-            maxP0.X = (_numColumns * _tileWidth) - Width;
-            maxP0.Y = (_numRows * _tileHeight) - Height;
-
-            if (maxP0.X < 0)
-                maxP0.X = 0;
-
-            if (maxP0.Y < 0)
-                maxP0.Y = 0;
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Enabled == false)
-                return;
+            base.Update(gameTime);
         }
-
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (Visibled == false)
+            int startRow = (int)P0.Y / TileHeight;
+            int startCol = (int)P0.X / TileWidth;
+
+            if ((startRow < 0) || (startCol < 0))
                 return;
 
-            int drawColumn = (int)(_P0.X / _tileWidth);
-            int drawRow = (int)(_P0.Y / _tileHeight);
-            
+            int dx = (int)P0.X % TileWidth;
+            int dy = (int)P0.Y % TileHeight;
 
-            if ((drawColumn < 0) || (drawRow < 0))
-                return;
+            int maxRoxIdx = ((startRow + nRowToDraw) < NumRows) ?
+                                 (startRow + nRowToDraw) :
+                                 NumRows;
 
-            int dx = (int)(_P0.X) % _tileWidth;
-            int dy = (int)(_P0.Y) % _tileHeight;
+            int maxColIdx = ((startCol + nColToDraw) < NumColumns) ?
+                                (startCol + nColToDraw) :
+                                NumColumns;
 
-            for (int row = drawRow; row < drawRow + numRowsOnScreen && row < NumRows; row++)
-                for (int col = drawColumn; col < drawColumn + numColumnsOnScreen && col < NumColumns; col++)
-                    if (Tiles[row, col].Background != null)
-                        spriteBatch.Draw(
-                            Tiles[row, col].Background,
-                            new Rectangle((col - drawColumn) * TileHeight - dx, (row - drawRow) * TileWidth - dy, TileWidth, TileHeight),
-                            Color.White);
+            for (int row = startRow; row < maxRoxIdx; row++)
+                for (int col = startCol; col < maxColIdx; col++)
+                    spriteBatch.Draw(
+                        Tiles[row, col].Background,
+                        new Rectangle(col * TileHeight - dx - (int)P0.X, row * TileWidth - dy - (int)P0.Y, TileWidth, TileHeight),
+                        Color.White);
         }
 
         public bool ScrollTo(int positionX, int positionY)
         {
+            Debug.WriteLine("Position = " + positionX + ", " + positionY);
+            Debug.WriteLine("MaxP0 = " + maxP0.X + ", " + maxP0.Y);
+            Debug.WriteLine("P0 = " + P0.X + ", " + P0.Y);
+
             if (positionX < 0)
                 _P0.X = 0;
             else if (positionX > maxP0.X)
@@ -250,6 +197,7 @@ namespace TSLibrary.Map
                 _P0.Y = maxP0.Y;
             else
                 _P0.Y = positionY;
+
 
             return true;
         }

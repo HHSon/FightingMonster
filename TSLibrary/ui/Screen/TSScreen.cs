@@ -13,7 +13,7 @@ namespace TSLibrary.ui.Control.Screen
     /// <summary>
     /// TSScreen là đối tượng vẽ lên toàn bộ màn hình vật lý
     /// </summary>
-    public abstract class TSScreen : TSVisibleGameEntity
+    public abstract class TSScreen : TSVisibleGameObject
     {
         protected TSControlManager _controlManager;
         protected Texture2D _backgroundImage;
@@ -75,8 +75,10 @@ namespace TSLibrary.ui.Control.Screen
 
         public override void Update(GameTime gameTime)
         {
-            if (Enabled == true)
-                this.ControlManager.Update(gameTime);
+            if (Enabled == false)
+                return;
+
+            this.ControlManager.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

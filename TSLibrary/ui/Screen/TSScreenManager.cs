@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TSLibrary.ui.Screen.ScreenManager
 {
-    public class TSScreenManager : TSInvisibleGameEntity
+    public class TSScreenManager : TSInvisibleGameObject
     {
         private List<TSScreen> _screens;
         private Game game;
@@ -39,7 +39,7 @@ namespace TSLibrary.ui.Screen.ScreenManager
         }
 
         /// <summary>
-        /// Cập nhập các màn hình con
+        /// Cập nhập màn hình đang hiển thị
         /// </summary>
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
@@ -47,8 +47,10 @@ namespace TSLibrary.ui.Screen.ScreenManager
             if (Enabled == false)
                 return;
 
-            for (int idx = 0; (idx < _screens.Count); idx++)
-                _screens[idx].Update(gameTime);
+            if (_screens.Count > 0)
+                _screens[_screens.Count - 1].Update(gameTime);
+            /*for (int idx = 0; (idx < _screens.Count); idx++)
+                _screens[idx].Update(gameTime);*/
         }
 
         /// <summary>

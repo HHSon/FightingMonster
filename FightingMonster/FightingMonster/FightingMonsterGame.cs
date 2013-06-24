@@ -33,6 +33,8 @@ namespace FightingMonter
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+            //graphics.IsFullScreen = true;
+
             if (graphics.IsFullScreen == true)
             {
                 graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;

@@ -5,13 +5,14 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace TSLibrary
 {
     /// <summary>
     /// Đối tượng gốc mà mọi đối tượng được vẽ lên màn hình kế thừa
     /// </summary>
-    public abstract class TSVisibleGameEntity : TSGameEntity
+    public abstract class TSVisibleGameObject : TSGameObject
     {
         protected bool _visibled;
         protected Vector2 _position;
@@ -82,12 +83,16 @@ namespace TSLibrary
         #endregion
 
 
-        public TSVisibleGameEntity()
+        public TSVisibleGameObject()
         {
             _visibled = true;
             _width = 100;
             _height = 20;
         }
+		
+		public virtual void LoadContent(ContentManager content)
+		{
+		}
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {

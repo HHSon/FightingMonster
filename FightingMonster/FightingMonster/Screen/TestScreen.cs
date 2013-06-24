@@ -14,6 +14,7 @@ using TSLibrary.ui.Control.Label;
 using TSLibrary.Input;
 using Microsoft.Xna.Framework.Input;
 using TSLibrary.Map;
+using System.Diagnostics;
 
 namespace FightingMonster.Screen
 {
@@ -44,13 +45,24 @@ namespace FightingMonster.Screen
         {
             ControlHelper.GetInstance().ToStandardButton(btnClose);
 
-            map = new TSMap(100, 100, this.Width, this.Height);
-            map.TileBackground = content.Load<Texture2D>(@"Image/Map/grass");
-            map.LoadContent(content);
+            map = new TSMap(this.Width, this.Height);
+            map.LoadContent("Content/Map/lv01.tmx", content);
         }
 
         public override void Update(GameTime gameTime)
         {
+            MouseState ms = TSInputHandler.MouseState;
+
+            int d = 10;
+            if (ms.X < d)
+                map.Move(-5, 0);
+            else if ((this.Width - d) <= ms.X && ms.X < this.Width)
+                map.Move(5, 0);
+            else if (ms.Y < d)
+                map.Move(0, -5);
+            else if ((this.Height - d) <= ms.Y && ms.Y < this.Height)
+                map.Move(0, 5);
+
 
             map.Update(gameTime);
             base.Update(gameTime);

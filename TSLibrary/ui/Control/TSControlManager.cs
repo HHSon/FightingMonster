@@ -15,7 +15,7 @@ namespace TSLibrary.ui.Control.ControlManager
     /// <summary>
     /// Chịu trách nhiệm quản lý các control con trong một layout hay một sreen
     /// </summary>
-    public class TSControlManager : TSInvisibleGameEntity
+    public class TSControlManager : TSInvisibleGameObject
     {
         public int ParentWidth { get; set; }
         public int ParentHeight { get; set; }
@@ -67,14 +67,15 @@ namespace TSLibrary.ui.Control.ControlManager
 
         public override void Update(GameTime gameTime)
         {
-            if (Enabled == true)
-            {
-                foreach (TSControl control in Controls)
-                    control.Update(gameTime);
+            if (Enabled == false)
+                return;
 
-                UpdateMouseEvent(gameTime);
-                UpdateKeyboardEvent(gameTime);
-            }
+            foreach (TSControl control in Controls)
+                control.Update(gameTime);
+
+            UpdateMouseEvent(gameTime);
+            UpdateKeyboardEvent(gameTime);
+            
         }
 
         protected void UpdateMouseEvent(GameTime gameTime)

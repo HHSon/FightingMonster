@@ -9,7 +9,7 @@ namespace TSLibrary
     /// <summary>
     /// Đối tượng gốc mà các đối tượng khác kế thừa
     /// </summary>
-    public abstract class TSGameEntity
+    public abstract class TSGameObject
     {
         protected bool _enabled = true;
 
