@@ -17,29 +17,51 @@ namespace TSLibrary.Texture
             List<Texture2D> list = new List<Texture2D>();
             Rectangle tempRect;
 
-            var graphics = srcImage.GraphicsDevice;
+            //var graphics = srcImage.GraphicsDevice;
 
             int numRows = srcImage.Height / tileHeight;
-            int dy = srcImage.Height % tileHeight;
-            if (dy > 0)
-                numRows = numRows + 1;
-
             int numCols = srcImage.Width / tileWidth;
-            int dx = srcImage.Width % tileWidth;
-            if (dx > 0)
-                numCols = numCols + 1;
 
 
             for (int row = 0; row < numRows; row++)
                 for (int col = 0; col < numCols; col++)
                 {
                     tempRect = new Rectangle(col * tileWidth, row * tileHeight, tileWidth, tileHeight);
-                    list.Add(cropTexture2D(graphics, srcImage, tempRect));
+                    //list.Add(cropTexture2D(graphics, srcImage, tempRect));
+                     list.Add(Crop(srcImage, tempRect));
                 }
 
-            graphics.SetRenderTarget(null);
+            //graphics.SetRenderTarget(null);
 
             return list;
+        }
+
+        public static Texture2D Crop(Texture2D source, Rectangle area)
+        {
+            // Tham khảo tại: http://stuckinprogramming.blogspot.com/2011/01/crop-texture2d-in-xna.html
+
+            if (source == null)
+                return null;
+
+            Texture2D cropped = new Texture2D(source.GraphicsDevice, area.Width, area.Height);
+            Color[] data = new Color[source.Width * source.Height];
+            Color[] cropData = new Color[cropped.Width * cropped.Height];
+
+            source.GetData<Color>(data);
+
+            int index = 0;
+
+            for (int y = area.Y; y < (area.Y + area.Height); y++)
+            {
+                for (int x = area.X; x < (area.X + area.Width); x++)
+                {
+                    cropData[index] = data[x + (y * source.Width)];
+                    index++;
+                }
+            }
+
+            cropped.SetData<Color>(cropData);
+            return cropped;
         }
 
         public static Texture2D cropTexture2D(GraphicsDevice graphics, Texture2D image, Rectangle source)

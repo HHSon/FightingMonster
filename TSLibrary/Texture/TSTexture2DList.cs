@@ -19,7 +19,7 @@ namespace TSLibrary.Texture
         protected int _iTexture;
         protected List<Texture2D> _textures;
         protected bool _isAnimated;
-        protected int _delay;
+        protected short _delay;
 
 
         #region Property Region
@@ -75,7 +75,7 @@ namespace TSLibrary.Texture
         /// Độ dừng khi chuyển các texture. Tính theo số chu kì update của lớp
         /// nếu delay = 10 thì sau 10 chu kì texture mới chuyển 1 lần
         /// </summary>
-        public int delay
+        public short Delay
         {
             get { return _delay; }
             set { _delay = value; }
@@ -84,7 +84,7 @@ namespace TSLibrary.Texture
         #endregion
 
 
-        protected int delayCount;
+        protected short delayCount;
 
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace TSLibrary.Texture
             _textures = new List<Texture2D>();
             _iTexture = 0;
             _isAnimated = false;
-            _delay = 5;
+            _delay = 4;
             delayCount = 0;
         }
 
@@ -161,7 +161,7 @@ namespace TSLibrary.Texture
 		///<summary>
 		/// Cho phép các texture chuyển sau mỗi delay chu kì update
 		///</summary>
-		public void Animate(int delay)
+		public void Animate(short delay)
 		{
 			if (_isAnimated == false)
 				_isAnimated = true;
@@ -178,11 +178,12 @@ namespace TSLibrary.Texture
             {
                 delayCount++;
                 if (delayCount >= _delay)
+                {
                     delayCount = 0;
-
-                _iTexture++;
-                if (_iTexture >= _textures.Count)
-                    _iTexture = 0;
+                    _iTexture++;
+                    if (_iTexture >= _textures.Count)
+                        _iTexture = 0;
+                }
             }
         }
     }

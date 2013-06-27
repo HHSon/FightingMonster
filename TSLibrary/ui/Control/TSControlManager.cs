@@ -197,12 +197,11 @@ namespace TSLibrary.ui.Control.ControlManager
 
             if ((pressedKey != null) && (pressedKey.Length > 0))
             {
-                if (lastPressedKey != null && lastPressedKey.Length > 0 && pressedKey.Length == lastPressedKey.Length)
+                if ((lastPressedKey != null) && (lastPressedKey.Length > 0) && (pressedKey.Length == lastPressedKey.Length))
                     focusingControl.OnKeyDown(null);
                 else
                     focusingControl.OnKeyPress(null);
             }
-
         }
 
         protected TSControl FindMouseHoverControl()

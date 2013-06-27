@@ -15,6 +15,8 @@ using TSLibrary.Input;
 using Microsoft.Xna.Framework.Input;
 using TSLibrary.Map;
 using System.Diagnostics;
+using TSLibrary.GameEntity;
+using FightingMonster.Character;
 
 namespace FightingMonster.Screen
 {
@@ -22,6 +24,7 @@ namespace FightingMonster.Screen
     {
         private TSMap map;
         private TSButton btnClose;
+        private BlueWarrior blue;
         
         public TestScreen(GraphicsDeviceManager graphics)
             : base(graphics)
@@ -39,14 +42,20 @@ namespace FightingMonster.Screen
             btnClose.MarginTop = 1;
             btnClose.MouseClick += btnClose_Click;
             this.Add(btnClose);
+
+            map = new TSMap(this.Width, this.Height);
+
+            blue = new BlueWarrior();
+            blue.Initialize();
         }
 
         public override void LoadContent(ContentManager content)
         {
             ControlHelper.GetInstance().ToStandardButton(btnClose);
 
-            map = new TSMap(this.Width, this.Height);
+            
             map.LoadContent("Content/Map/lv01.tmx", content);
+            blue.LoadContent(content);
         }
 
         public override void Update(GameTime gameTime)
@@ -63,14 +72,18 @@ namespace FightingMonster.Screen
             else if ((this.Height - d) <= ms.Y && ms.Y < this.Height)
                 map.Move(0, 5);
 
+            if (ms.LeftButton == ButtonState.Pressed)
+                blue.MoveTo(ms.X, ms.Y);
 
             map.Update(gameTime);
+            blue.Update(gameTime);
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             map.Draw(gameTime, spriteBatch);
+            blue.Draw(gameTime, spriteBatch);
             base.Draw(gameTime, spriteBatch);
         }
 

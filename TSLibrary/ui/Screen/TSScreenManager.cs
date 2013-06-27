@@ -39,7 +39,7 @@ namespace TSLibrary.ui.Screen.ScreenManager
         }
 
         /// <summary>
-        /// Cập nhập màn hình đang hiển thị
+        /// Cập nhập màn hình đang hiển thị, những màn hình bên dưới không được cập nhập
         /// </summary>
         /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
@@ -49,6 +49,7 @@ namespace TSLibrary.ui.Screen.ScreenManager
 
             if (_screens.Count > 0)
                 _screens[_screens.Count - 1].Update(gameTime);
+
             /*for (int idx = 0; (idx < _screens.Count); idx++)
                 _screens[idx].Update(gameTime);*/
         }
@@ -72,14 +73,13 @@ namespace TSLibrary.ui.Screen.ScreenManager
         {
             if (screenToAdd != null)
             {
-                
                 if (_screens.Count > 0)
                     _screens[_screens.Count - 1].Visibled = false;
 
                 screenToAdd.ScreenManager = this;
                 screenToAdd.Visibled = true;
-                _screens.Add(screenToAdd);
-                
+
+                _screens.Add(screenToAdd);       
             }
         }
 

@@ -161,16 +161,18 @@ namespace TSLibrary.ui.Control.Layout
             tempRect.Height = Height;
 
             if (Visibled)
+            {
                 if (BackgroundImage != null)
                     spriteBatch.Draw(BackgroundImage, tempRect, Color.White);
 
-
-            ControlManager.DrawControls(gameTime, spriteBatch);
+                ControlManager.DrawControls(gameTime, spriteBatch);
+            }
         }
 
         public override void OnParentPositionChange(EventArgs e)
         {
             base.OnParentPositionChange(e);
+
             ControlManager.ParentWidth = this.Width;
             ControlManager.ParentHeight = this.Height;
             ControlManager.OnParentPositionChange(e);

@@ -145,31 +145,27 @@ namespace FightingMonters.Screen
 
         public void btnStartGame_Click(object sender, EventArgs e)
         {
-            if (sender == null)
-                lblMessage.Text = "{null} Nút Bắt đầu được nhấn.";
-            else
-                lblMessage.Text = "{" + sender.ToString() + "}\nNút Bắt đầu được nhấn.";
+            PlayScreen ps = new PlayScreen(_graphics);
+            ps.Initialize();
+            ps.LoadContent(_content);
+            this.ScreenManager.Add(ps);
 
-
-            TestScreen testScreen = new TestScreen(_graphics);
-            testScreen.Initialize();
-            testScreen.LoadContent(_content);
-            this.ScreenManager.Add(testScreen);
+            /*TestScreen ts = new TestScreen(_graphics);
+            ts.Initialize();
+            ts.LoadContent(_content);
+            this.ScreenManager.Add(ts);*/
         }
 
         public void btnIntroduction_Click(object sender, EventArgs e)
         {
-            lblMessage.Text = "Nút Giới thiệu được nhấn.";
         }
 
         public void btnSettings_Click(object sender, EventArgs e)
         {
-            lblMessage.Text = "Nút Cài đặt được nhấn.";
         }
 
         public void btnAbout_Click(object sender, EventArgs e)
         {
-            lblMessage.Text = "Sinh viên thực hiện 1012355 - 1012435";
         }
     }
 }

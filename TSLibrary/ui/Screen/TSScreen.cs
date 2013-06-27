@@ -68,15 +68,15 @@ namespace TSLibrary.ui.Control.Screen
             _controlManager.ParentHeight = _height;
         }
 
-        public virtual void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
             _content = content;
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Enabled == false)
-                return;
+            /*if (Enabled == false)
+                return;*/
 
             this.ControlManager.Update(gameTime);
         }
@@ -87,6 +87,7 @@ namespace TSLibrary.ui.Control.Screen
             {
                 if (_backgroundImage != null)
                     spriteBatch.Draw(_backgroundImage, new Rectangle(0, 0, Width, Height), Color.White);
+
                 this.ControlManager.DrawControls(gameTime, spriteBatch);
             }
         }

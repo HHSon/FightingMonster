@@ -54,5 +54,18 @@ namespace TSLibrary.GameEntity
 								new Rectangle((int)_position.X, (int)_position.Y, _width, _height), 
 								Color.White);
 		}
+
+        public void Draw(Vector2 position, GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            if (_visibled == false)
+                return;
+
+            if (_background != null)
+                if (_background.CurrentTexture != null)
+                    spriteBatch.Draw(
+                                _background.CurrentTexture,
+                                new Rectangle((int)position.X, (int)position.Y, _width, _height),
+                                Color.White);
+        }
     }
 }

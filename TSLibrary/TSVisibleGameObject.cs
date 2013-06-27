@@ -94,6 +94,10 @@ namespace TSLibrary
 		{
 		}
 
+        public virtual void UnloadContent()
+        {
+        }
+
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
         }

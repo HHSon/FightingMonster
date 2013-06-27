@@ -178,10 +178,27 @@ namespace TSLibrary.Map
             Vector2 vector = new Vector2();
         }*/
 
-        /*public bool IsInDrawnArea(Vector2 position)
+        public bool IsInDrawnArea(Vector2 position)
         {
-            return false;
-        }*/
+            if ((position.X < _P0.X) || (position.X > _P0.X + Width))
+                return false;
+
+            if ((position.Y < _P0.Y) || (position.Y > _P0.Y + Height))
+                return false;
+
+            return true;
+        }
+
+        public bool IsInDrawnArea(Vector2 position, int width, int height)
+        {
+            if ((position.X + width < _P0.X) || (position.X > _P0.X + Width))
+                return false;
+
+            if ((position.Y + height < _P0.Y) || (position.Y > _P0.Y + Height))
+                return false;
+
+            return true;
+        }
 
         /*public Vector2[] GetPath(Vector2 position, Vector2 destPosition)
         {
@@ -234,7 +251,7 @@ namespace TSLibrary.Map
                             Color.White);
         }
 
-        public bool ScrollTo(int positionX, int positionY)
+        public bool ScrollTo(float positionX, float positionY)
         {
             if (positionX < 0)
                 _P0.X = 0;
@@ -256,12 +273,12 @@ namespace TSLibrary.Map
 
         public bool ScrollTo(Vector2 point)
         {
-            return ScrollTo((int)point.X, (int)point.Y);
+            return ScrollTo(point.X, point.Y);
         }
 
-        public bool Move(int dx, int dy)
+        public bool Move(float dx, float dy)
         {
-            return ScrollTo((int)P0.X + dx, (int)P0.Y + dy);
+            return ScrollTo(P0.X + dx, P0.Y + dy);
         }
 
         public Vector2 GetPositionOnScreen(Vector2 positionOnMap)

@@ -135,7 +135,7 @@ namespace TSLibrary.Map
             {
                 foreach (XmlNode child in dataNode)
                 {
-                    TileMatrix[count / NumRows, count % NumRows] =
+                    TileMatrix[count / NumColumns, count % NumColumns] =
                         Int32.Parse(child.Attributes["gid"].Value);
                     count++;
                 }
